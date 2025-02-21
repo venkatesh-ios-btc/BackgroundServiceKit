@@ -48,6 +48,7 @@ public class BackgroundService {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.numberOfLoops = -1 // Infinite loop
                 audioPlayer?.play()
+                print("silent music is playing")
             }
         } catch {
             print("❌ Audio session error: \(error)")

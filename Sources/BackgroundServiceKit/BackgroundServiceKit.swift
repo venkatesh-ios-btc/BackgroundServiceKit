@@ -48,7 +48,14 @@ public class BackgroundService {
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.numberOfLoops = -1 // Infinite loop
                 audioPlayer?.play()
-                print("silent music is playing")
+                print("✅ Silent music started playing")
+                
+                // Print confirmation every 10 seconds
+                Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
+                    if self.audioPlayer?.isPlaying == true {
+                        print("🎵 Silent music is still playing in the background")
+                    }
+                }
             }
         } catch {
             print("❌ Audio session error: \(error)")

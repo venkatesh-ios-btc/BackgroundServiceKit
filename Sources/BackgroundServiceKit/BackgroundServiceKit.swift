@@ -45,22 +45,19 @@ public class BackgroundService {
             try audioSession.setActive(true)
 
             if let url = Bundle.main.url(forResource: "silent", withExtension: "mp3") {
+                print("✅ Silent audio file found at: \(url)")
                 audioPlayer = try AVAudioPlayer(contentsOf: url)
                 audioPlayer?.numberOfLoops = -1 // Infinite loop
                 audioPlayer?.play()
-                print("✅ Silent music started playing")
-                
-                // Print confirmation every 10 seconds
-                Timer.scheduledTimer(withTimeInterval: 10, repeats: true) { _ in
-                    if self.audioPlayer?.isPlaying == true {
-                        print("🎵 Silent music is still playing in the background")
-                    }
-                }
+                print("✅ Silent music is playing")
+            } else {
+                print("❌ Silent audio file not found!")
             }
         } catch {
             print("❌ Audio session error: \(error)")
         }
     }
+
 
     private func stopAudioPlayback() {
         audioPlayer?.stop()
